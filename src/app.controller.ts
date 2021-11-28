@@ -2,9 +2,8 @@ import { Body, Controller, Get, HttpCode, Post, UseGuards } from '@nestjs/common
 import { AuthService } from './auth/auth.service';
 import { LoggedInUser } from './auth/dto/logged-in-user.dto';
 import { SignUp } from './auth/dto/signUp.dto';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth.guard';
-import { CheckedAuthRes } from './auth/interfaces/checked-auth-res.interface';
+import { CheckedAuthRes } from './auth/types/checked-auth-res.type';
 import { UserReq } from './common/decorators/requests/logged-in-user.decorator';
 
 @Controller()

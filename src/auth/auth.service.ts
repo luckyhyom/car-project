@@ -3,9 +3,9 @@ import { UsersService } from 'src/models/users/users.service';
 import * as bcrypt from 'bcrypt';
 import { SignUp } from './dto/signUp.dto';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { CheckedAuthRes } from './interfaces/checked-auth-res.interface';
-import { AccessToken } from './interfaces/jwt.interface';
+import { JwtPayload } from './types/jwt-payload.type';
+import { CheckedAuthRes } from './types/checked-auth-res.type';
+import { AccessToken } from './types/jwt.type';
 import { LoggedInUser } from './dto/logged-in-user.dto';
 
 @Injectable()
