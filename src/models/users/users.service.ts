@@ -12,7 +12,7 @@ export class UsersService {
         if(user) {
             throw new HttpException('ID already exists.', HttpStatus.CONFLICT);
         }
-        return this.usersRepository.createOne(body);
+        return await this.usersRepository.createOne(body);
     }
 
     async findOne(userIdOrPK: string|number):  Promise<User> {

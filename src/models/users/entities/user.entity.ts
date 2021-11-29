@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Car } from "src/models/cars/entities/car.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -10,4 +11,7 @@ export class User {
 
     @Column({ type: "varchar", length: 20 })
     password: string;
+
+    @OneToMany((type) => Car, (car) => car.user)
+    cars: Car[];
 }
