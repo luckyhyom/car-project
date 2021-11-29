@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { LimitArrayPipe } from 'src/common/pipes/limit-array.pipe';
 import { CreateTrimReq } from 'src/dto/CreateTrimReq.dto';
@@ -15,5 +15,11 @@ export class CarsController {
         createTrimsReq :CreateTrimReq[]
     ) {
         return this.carsService.enroll(createTrimsReq);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Get(':userId')
+    getUserTires(@Param('userId') userId: string) {
+        return this.carsService.getUserCars(userId);
     }
 }

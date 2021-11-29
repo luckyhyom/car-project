@@ -34,6 +34,11 @@ export class CarsService {
         return result;
     }
 
+    async getUserCars(userId: string) {
+        const user = await this.usersRepository.findBy(userId);
+        return await this.carsRepository.findUserCars(user.pk);
+    }
+
     async getMessageForm() {
         return {
             success: {
