@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { LimitArrayPipe } from 'src/common/pipes/limit-array.pipe';
-import { CreateTrimReq } from 'src/dto/CreateTrimReq.dto';
+import { CreateTrimReq } from 'src/models/cars/dto/CreateTrimReq.dto';
 import { CarsService } from './cars.service';
 
 @Controller('cars')

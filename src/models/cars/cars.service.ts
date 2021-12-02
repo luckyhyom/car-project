@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateTrimReq } from 'src/dto/CreateTrimReq.dto';
+import { CreateTrimReq } from 'src/models/cars/dto/CreateTrimReq.dto';
 import { TiresService } from '../tires/tires.service';
 import { UsersRepository } from '../users/users.repository';
 import { CarsRepository } from './cars.repository';
