@@ -17,9 +17,12 @@ export class CarsService {
         
         for (const dto of createTrimsReq) {
             const { id, trimId } = dto;
-            const { frontTireStandard, rearTireStandard } = await this.tiresService.getTires(trimId);
-            
-            if(!await this.tiresService.validateTireFormat(frontTireStandard, rearTireStandard)) {
+            const tireSet = await this.tiresService.getTires(trimId);
+            const isRightFormat = await tireSet.isRightFormat();
+            const frontTire = await tireSet.getFront();
+            const rearTire = await tireSet.getRear();
+
+            if (!isRightFormat) {
                 result.fail.id.push(id);
                 continue;
             }
@@ -27,7 +30,7 @@ export class CarsService {
             const user = await this.usersRepository.findBy(id);
             const createdCar = await this.carsRepository.createOne({ user, trimId });
 
-            await this.tiresService.createTireSet(frontTireStandard, rearTireStandard, createdCar);
+            await this.tiresService.createTireSet(frontTire, rearTire, createdCar);
             result.success.id.push(id);
         }
 

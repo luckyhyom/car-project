@@ -1,7 +1,10 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { lastValueFrom } from 'rxjs';
 import { Car } from '../cars/entities/car.entity';
+import { TireSet } from './dto/tireSet.dto';
+import { Tire } from './entities/tire.entity';
 import { TiresRepository } from './tires.repository';
 
 @Injectable()
@@ -38,21 +41,6 @@ export class TiresService {
             this.httpService.get(`https://dev.mycar.cardoc.co.kr/v1/trim/${trimId}`)
         );
 
-        const frontTireStandard = await this.removeSpace(res.data.spec.driving.frontTire.value);
-        const rearTireStandard = await this.removeSpace(res.data.spec.driving.rearTire.value);
-
-        return {
-            frontTireStandard,
-            rearTireStandard
-        }
-    }
-
-    private async removeSpace(value) {
-        return await value.replace(/(\s*)/g, "");
-    }
-
-    async validateTireFormat(frontTireStandard, rearTireStandard) {
-        const tireStandardReg = /[1-3][0-9][05]\/[1-9][0-9]Z?[RD][1-2][0-9]/;
-        return tireStandardReg.test(frontTireStandard) && tireStandardReg.test(rearTireStandard)
+        return plainToInstance(TireSet,res.data.spec.driving);
     }
 }
